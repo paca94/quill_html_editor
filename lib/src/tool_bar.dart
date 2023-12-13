@@ -247,6 +247,9 @@ class ToolBar extends StatefulWidget {
 
   final bool? _isScrollable;
 
+  /// pick image
+  final Function pickImages;
+
   ///[ToolBar] widget to show the quill
   /// The toolbar items will be auto aligned based on the screen's width or height
   /// The behaviour of the widget's alignment is similar to [Wrap] widget
@@ -270,6 +273,7 @@ class ToolBar extends StatefulWidget {
     this.activeIconColor = Colors.blue,
     this.toolBarColor = Colors.white,
     this.mainAxisSize,
+    this.pickImages = pickImages,
   })  : assert(crossAxisAlignment is WrapCrossAlignment,
             "Please pass WrapCrossAlignment, instead of CrossAxisAlignment"),
         mainAxisAlignment = MainAxisAlignment.start,
@@ -300,6 +304,7 @@ class ToolBar extends StatefulWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.min,
     this.textBaseline = TextBaseline.alphabetic,
+    this.pickImages = pickImages,
   })  : assert(crossAxisAlignment is CrossAxisAlignment,
             "Please pass CrossAxisAlignment, instead of WrapCrossAlignment"),
         spacing = 0.0,
@@ -696,10 +701,10 @@ class ToolBarState extends State<ToolBar> {
                 } else if (toolbarItem.style == ToolBarStyle.redo) {
                   widget.controller.redo();
                 } else if (toolbarItem.style == ToolBarStyle.image) {
-                  await ImageSelector(onImagePicked: (value) {
+                  await widget.pickImages((value) {
                     _formatMap['image'] = value;
                     widget.controller.embedImage(value);
-                  }).pickFiles();
+                  });
                 } else if (toolbarItem.style == ToolBarStyle.clean) {
                   List<ToolBarItem> tempList = [];
                   for (var value in _toolbarList) {
