@@ -823,25 +823,25 @@ class ToolBarState extends State<ToolBar> {
               alignment: Alignment.centerLeft,
               selectedItemBuilder: (context) {
                 return [
-                  _fontSelectionTextItem(type: 'Small'),
-                  _fontSelectionTextItem(type: 'Normal'),
-                  _fontSelectionTextItem(type: 'Large'),
-                  _fontSelectionTextItem(type: 'Huge'),
+                  // _fontSelectionTextItem(type: 'Small'),
+                  _fontSelectionTextItem(type: '보통'),
+                  _fontSelectionTextItem(type: '크게'),
+                  _fontSelectionTextItem(type: '더 크게'),
                 ];
               },
               isDense: true,
-              value: _formatMap['size'] ?? 'normal',
+              value: _formatMap['size'] ?? '보통',
               style: TextStyle(fontSize: 12, color: widget.iconColor!),
               items: [
-                _fontSizeItem(type: 'Small', fontSize: 8),
-                _fontSizeItem(type: 'Normal', fontSize: 12),
-                _fontSizeItem(type: 'Large', fontSize: 16),
-                _fontSizeItem(type: 'Huge', fontSize: 20),
+                // _fontSizeItem(type: 'Small', fontSize: 8),
+                _fontSizeItem(type: '보통', fontSize: 12),
+                _fontSizeItem(type: '크게', fontSize: 16),
+                _fontSizeItem(type: '더 크게', fontSize: 20),
               ],
               onChanged: (value) {
                 _formatMap['size'] = value;
                 widget.controller.setFormat(
-                    format: 'size', value: value == 'normal' ? '' : value);
+                    format: 'size', value: value == '보통' ? '' : value);
                 setState(() {});
               }),
         ),
@@ -871,7 +871,7 @@ class ToolBarState extends State<ToolBar> {
       child: Text(type,
           style: TextStyle(
               fontSize: 14,
-              color: type.toLowerCase() != 'normal'
+              color: type.toLowerCase() != '보통'
                   ? widget.activeIconColor
                   : widget.iconColor!,
               fontWeight: FontWeight.bold)),
