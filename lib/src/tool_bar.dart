@@ -823,20 +823,20 @@ class ToolBarState extends State<ToolBar> {
               alignment: Alignment.centerLeft,
               selectedItemBuilder: (context) {
                 return [
-                  _fontSelectionTextItem(type: 'Small'),
-                  _fontSelectionTextItem(type: 'Normal'),
-                  _fontSelectionTextItem(type: 'Large'),
-                  _fontSelectionTextItem(type: 'Huge'),
+                  // _fontSelectionTextItem(type: 'Small', ko: ""),
+                  _fontSelectionTextItem(type: 'Normal', ko: "보통"),
+                  _fontSelectionTextItem(type: 'Large', ko: "크게"),
+                  _fontSelectionTextItem(type: 'Huge', ko: "더 크게"),
                 ];
               },
               isDense: true,
               value: _formatMap['size'] ?? 'normal',
               style: TextStyle(fontSize: 12, color: widget.iconColor!),
               items: [
-                _fontSizeItem(type: 'Small', fontSize: 8),
-                _fontSizeItem(type: 'Normal', fontSize: 12),
-                _fontSizeItem(type: 'Large', fontSize: 16),
-                _fontSizeItem(type: 'Huge', fontSize: 20),
+                // _fontSizeItem(type: 'Small', fontSize: 8),
+                _fontSizeItem(type: 'Normal', ko: "보통", fontSize: 12),
+                _fontSizeItem(type: 'Large',ko: "크게", fontSize: 16),
+                _fontSizeItem(type: 'Huge',ko: "더 크게", fontSize: 20),
               ],
               onChanged: (value) {
                 _formatMap['size'] = value;
@@ -850,11 +850,11 @@ class ToolBarState extends State<ToolBar> {
   }
 
   DropdownMenuItem _fontSizeItem(
-      {required String type, required double fontSize}) {
+      {required String type, String? ko, required double fontSize}) {
     return DropdownMenuItem(
         value: type.toLowerCase(),
         child: WebViewAware(
-          child: Text(type,
+          child: Text(ko ?? type,
               style: TextStyle(
                   fontSize: fontSize,
                   color: _formatMap['size'] == type.toLowerCase()
@@ -865,10 +865,10 @@ class ToolBarState extends State<ToolBar> {
   }
 
   Widget _fontSelectionTextItem({
-    required String type,
+    required String type, String? ko,
   }) {
     return SizedBox(
-      child: Text(type,
+      child: Text(ko ?? type,
           style: TextStyle(
               fontSize: 14,
               color: type.toLowerCase() != 'normal'
