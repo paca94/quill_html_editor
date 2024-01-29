@@ -835,8 +835,8 @@ class ToolBarState extends State<ToolBar> {
               items: [
                 // _fontSizeItem(type: 'Small', fontSize: 8),
                 _fontSizeItem(type: 'Normal', ko: "보통", fontSize: 12),
-                _fontSizeItem(type: 'Large',ko: "크게", fontSize: 16),
-                _fontSizeItem(type: 'Huge',ko: "더 크게", fontSize: 20),
+                _fontSizeItem(type: 'Large',ko: "크게", fontSize: 12),
+                _fontSizeItem(type: 'Huge',ko: "더 크게", fontSize: 12),
               ],
               onChanged: (value) {
                 _formatMap['size'] = value;
@@ -857,10 +857,8 @@ class ToolBarState extends State<ToolBar> {
           child: Text(ko ?? type,
               style: TextStyle(
                   fontSize: fontSize,
-                  color: _formatMap['size'] == type.toLowerCase()
-                      ? widget.activeIconColor
-                      : widget.iconColor!,
-                  fontWeight: FontWeight.bold)),
+                  color: widget.iconColor!,
+                  fontWeight: _formatMap['size'] == type.toLowerCase() ? FontWeight.bold : FontWeight.normal)),
         ));
   }
 
@@ -871,9 +869,7 @@ class ToolBarState extends State<ToolBar> {
       child: Text(ko ?? type,
           style: TextStyle(
               fontSize: 14,
-              color: type.toLowerCase() != 'normal'
-                  ? widget.activeIconColor
-                  : widget.iconColor!,
+              color: widget.iconColor!,
               fontWeight: FontWeight.bold)),
     );
   }
